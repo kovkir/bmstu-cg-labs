@@ -19,7 +19,7 @@ def step_comparison(canvas, angle_entry, radius_entry):
     except:
         messagebox.showwarning("Ошибка", 
             "Неверно заданна длина отрезка для построения спектра!\n"
-            "Ожидался ввод действительного чисел.")
+            "Ожидался ввод целого числа.")
         return
 
     if radius <= 0:

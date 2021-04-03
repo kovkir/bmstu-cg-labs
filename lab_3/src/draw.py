@@ -65,7 +65,7 @@ def draw_line(canvas, color_fg, algorithm, x_beg_entry, y_beg_entry, x_end_entry
     except:
         messagebox.showwarning("Ошибка", 
             "Неверно заданны координаты начала отрезка!\n"
-            "Ожидался ввод действительных чисел.")
+            "Ожидался ввод целлых чисел.")
         return
     
     try:
@@ -74,7 +74,7 @@ def draw_line(canvas, color_fg, algorithm, x_beg_entry, y_beg_entry, x_end_entry
     except:
         messagebox.showwarning("Ошибка", 
             "Неверно заданны координаты конца отрезка!\n"
-            "Ожидался ввод действительных чисел.")
+            "Ожидался ввод целых чисел.")
         return
 
     add_line(canvas, color_fg, algorithm, [x_beg, y_beg], [x_end, y_end])
