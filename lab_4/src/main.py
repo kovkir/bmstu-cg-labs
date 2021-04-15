@@ -2,9 +2,6 @@ from tkinter import Tk, ttk, Radiobutton, Canvas, Label, Entry, Button, DISABLED
 from draw import draw_figure, draw_spectrum, clear_canvas, WINDOW_HEIGHT, WINDOW_WIDTH, CANVAS_WIDTH, CANVAS_HEIGHT
 from comparisons import time_comparison
 
-def stopper():
-    return
-
 def change_figure(rb_entry, figure):
     if figure.get() == True:
         rb_entry.configure(state = NORMAL)
