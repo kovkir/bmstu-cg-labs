@@ -3,26 +3,20 @@
 '''
 
 from math import sqrt
-from brezenham import reflect_dots_diag, reflect_dots_Ox, reflect_dots_Oy
+from pixels import draw_pixels
 
-def canonical_сircle(xc, yc, r, color):
-    dots = []
+def canonical_сircle(xc, yc, r, color, canvas, draw):
     sqr_r = r ** 2
 
-    for x in range(xc, round(xc + r / sqrt(2)) + 1):
+    border = round(xc + r / sqrt(2))
+
+    for x in range(xc, border + 1):
         y = yc + sqrt(sqr_r - (x - xc) ** 2)
     
-        dots.append([x, y, color])
+        if draw:
+            draw_pixels(canvas, [x, y, color], xc, yc, circle = True)
 
-    reflect_dots_diag(dots, xc, yc)
-    reflect_dots_Oy(dots, xc)
-    reflect_dots_Ox(dots, yc)
-
-    return dots
-
-def canonical_ellipse(xc, yc, ra, rb, color):
-    dots = []
-
+def canonical_ellipse(xc, yc, ra, rb, color, canvas, draw):
     sqr_ra = ra * ra
     sqr_rb = rb * rb
 
@@ -32,14 +26,11 @@ def canonical_ellipse(xc, yc, ra, rb, color):
     for x in range(xc, border_x + 1):
         y = yc + sqrt(sqr_ra * sqr_rb - (x - xc) ** 2 * sqr_rb) / ra
 
-        dots.append([x, y, color])
+        if draw:
+            draw_pixels(canvas, [x, y, color], xc, yc, circle = False)
 
     for y in range(border_y, yc - 1, -1):
         x = xc + sqrt(sqr_ra * sqr_rb - (y - yc) ** 2 * sqr_ra) / rb
 
-        dots.append([x, y, color])
-
-    reflect_dots_Ox(dots, yc)
-    reflect_dots_Oy(dots, xc)
-
-    return dots
+        if draw:
+            draw_pixels(canvas, [x, y, color], xc, yc, circle = False)

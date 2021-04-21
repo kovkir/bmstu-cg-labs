@@ -12,9 +12,9 @@ WINDOW_HEIGHT = 740
 CANVAS_WIDTH = WINDOW_HEIGHT + 150
 CANVAS_HEIGHT = WINDOW_HEIGHT
 
-def set_pixel(canvas, x, y, color):
-    canvas.create_line(x, y, x + 1, y, fill = color.hex)
-
+def clear_canvas(canvas):
+    canvas.delete("all")
+    
 def lib_ellipse(canvas, xc, yc, ra, rb, color):
     canvas.create_oval(xc - ra, yc - rb, xc + ra, yc + rb, outline = color.hex)
 
@@ -37,40 +37,32 @@ def add_ellipse(canvas, color_fg, algorithm, xc, yc, ra, rb, draw = True):
     alg = algorithm.get()
 
     if alg == 0:
-        dots = canonical_ellipse(xc, yc, ra, rb, color)
+        canonical_ellipse(xc, yc, ra, rb, color, canvas, draw)
     elif alg == 1:
-        dots = parameter_ellipse(xc, yc, ra, rb, color)
+        parameter_ellipse(xc, yc, ra, rb, color, canvas, draw)
     elif alg == 2:
-        dots = bresenham_ellipse(xc, yc, ra, rb, color)
+        bresenham_ellipse(xc, yc, ra, rb, color, canvas, draw)
     elif alg == 3:
-        dots = midpoint_ellipse(xc, yc, ra, rb, color)
+        midpoint_ellipse(xc, yc, ra, rb, color, canvas, draw)
     else:
         lib_ellipse(canvas, xc, yc, ra, rb, color)
         return
-
-    if draw:
-        for i in dots:
-            set_pixel(canvas, i[0], i[1], i[2])
     
 def add_circle(canvas, color_fg, algorithm, xc, yc, r, draw = True):
     color = get_color(color_fg)
     alg = algorithm.get()
 
     if alg == 0:
-        dots = canonical_сircle(xc, yc, r, color)
+        canonical_сircle(xc, yc, r, color, canvas, draw)
     elif alg == 1:
-        dots = parameter_circle(xc, yc, r, color)
+        parameter_circle(xc, yc, r, color, canvas, draw)
     elif alg == 2:
-        dots = bresenham_circle(xc, yc, r, color)
+        bresenham_circle(xc, yc, r, color, canvas, draw)
     elif alg == 3:
-        dots = midpoint_circle(xc, yc, r, color)
+        midpoint_circle(xc, yc, r, color, canvas, draw)
     else:
         lib_ellipse(canvas, xc, yc, r, r, color)
         return
-
-    if draw:
-        for i in dots:
-            set_pixel(canvas, i[0], i[1], i[2])
 
 def draw_figure(canvas, color_fg, algorithm, figure, 
                 xc_entry, yc_entry, ra_entry, rb_entry):
@@ -283,6 +275,3 @@ def draw_spectrum(canvas, color_fg, algorithm, figure, xc_entry, yc_entry,
     else:
         draw_spectrum_circle(canvas, color_fg, algorithm, xc, yc,
                               spectrum_var_arr, spectrum_entry_arr)
-
-def clear_canvas(canvas):
-    canvas.delete("all")

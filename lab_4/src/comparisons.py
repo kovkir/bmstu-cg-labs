@@ -10,7 +10,7 @@ from midpoint import midpoint_ellipse, midpoint_circle
 
 from draw import CANVAS_WIDTH, CANVAS_HEIGHT, clear_canvas, add_circle, add_ellipse
 
-NUMBER_OF_RUNS = 10
+NUMBER_OF_RUNS = 15
 MAX_RADIUS = 10000
 STEP = 1000
 
@@ -23,11 +23,11 @@ def time_comparison(canvas, color_fg, algorithm, figure):
     ellipse = figure.get()
     old_algorithm = algorithm.get()
 
-    for i in range(0, 5):
+    for i in range(5):
         algorithm.set(i)
 
         time_start = [0] * (MAX_RADIUS // STEP)
-        time_end = [0] * (MAX_RADIUS // STEP)
+        time_end   = [0] * (MAX_RADIUS // STEP)
 
         for _ in range(NUMBER_OF_RUNS):
             ra = STEP

@@ -3,30 +3,22 @@
 '''
 
 from math import cos, sin, pi
-from brezenham import reflect_dots_diag, reflect_dots_Ox, reflect_dots_Oy
+from pixels import draw_pixels
 
-def parameter_circle(xc, yc, r, color):
-    dots = []
+def parameter_circle(xc, yc, r, color, canvas, draw):
     step = 1 / r
 
     i = 0
     while i <= pi / 4 + step:
-        x = xc + r * cos(i)
-        y = yc + r * sin(i)
+        x = xc + round(r * cos(i))
+        y = yc + round(r * sin(i))
 
-        dots.append([x, y, color])
+        if draw:
+            draw_pixels(canvas, [x, y, color], xc, yc, circle = True)
         
         i += step
 
-    reflect_dots_diag(dots, xc, yc)
-    reflect_dots_Oy(dots, xc)
-    reflect_dots_Ox(dots, yc)
-
-    return dots
-
-def parameter_ellipse(xc, yc, ra, rb, color):
-    dots = []
-
+def parameter_ellipse(xc, yc, ra, rb, color, canvas, draw):
     if ra > rb:
         step = 1 / ra
     else:
@@ -34,15 +26,10 @@ def parameter_ellipse(xc, yc, ra, rb, color):
 
     i = 0
     while i <= pi / 2 + step:
-        x = xc + ra * cos(i)
-        y = yc + rb * sin(i)
+        x = xc + round(ra * cos(i))
+        y = yc + round(rb * sin(i))
 
-        dots.append([x, y, color])
+        if draw:
+            draw_pixels(canvas, [x, y, color], xc, yc, circle = False)
 
         i += step
-
-    reflect_dots_Oy(dots, xc)
-    reflect_dots_Ox(dots, yc)
-
-    return dots
-    
