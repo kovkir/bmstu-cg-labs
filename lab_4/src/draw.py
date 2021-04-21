@@ -127,7 +127,6 @@ def draw_spectrum_ellipse(canvas, color_fg, algorithm, xc, yc,
     try:
         if spectrum_var_arr[0].get():
             step = int(step_y_entry.get())
-            ra, rb = rb, ra
         else:
             step = int(step_x_entry.get())
     except:
@@ -162,8 +161,12 @@ def draw_spectrum_ellipse(canvas, color_fg, algorithm, xc, yc,
     while count_fig > 0:
         add_ellipse(canvas, color_fg, algorithm, xc, yc, ra, rb)
 
-        ra += step
-        rb = round(ra / constant)
+        if spectrum_var_arr[0].get():
+            rb += step
+            ra = round(rb * constant)
+        else:
+            ra += step
+            rb = round(ra / constant)
 
         count_fig -= 1
 

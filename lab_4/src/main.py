@@ -175,7 +175,7 @@ def draw_fields_for_ellipse():
 
     count_figure_entry.insert(0, 20)
     step_x_entry.insert(0, 10)
-    step_y_entry.insert(0, 4)
+    step_y_entry.insert(0, 10)
     step_y_entry.configure(state = DISABLED)
 
     spectrum_var_arr    = [step_BooleanVar]
