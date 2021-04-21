@@ -10,9 +10,9 @@ from midpoint import midpoint_ellipse, midpoint_circle
 
 from draw import CANVAS_WIDTH, CANVAS_HEIGHT, clear_canvas, add_circle, add_ellipse
 
-NUMBER_OF_RUNS = 100
-MAX_RADIUS = 100
-STEP = 10
+NUMBER_OF_RUNS = 10
+MAX_RADIUS = 10000
+STEP = 1000
 
 def time_comparison(canvas, color_fg, algorithm, figure):
     time_list = []
