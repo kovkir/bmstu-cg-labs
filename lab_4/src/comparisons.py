@@ -56,9 +56,14 @@ def time_comparison(canvas, color_fg, algorithm, figure):
     algorithm.set(old_algorithm)
     radius_arr = list(i for i in range(STEP, MAX_RADIUS + STEP, STEP))
 
+    if ellipse:
+        figure = "эллипса"
+    else:
+        figure = "окружности"
+
     plt.figure(figsize = (10, 6))
     plt.rcParams['font.size'] = '12'
-    plt.title("Замеры времени для построения фигуры различными методами")
+    plt.title("Замеры времени для построения %s различными методами.\n" %(figure))
 
     plt.plot(radius_arr, time_list[0], label = 'Каноническое уравнение')
     plt.plot(radius_arr, time_list[1], label = 'Параметрическое уравнение')
