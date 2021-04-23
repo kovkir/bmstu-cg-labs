@@ -14,19 +14,14 @@ def bresenham_circle(xc, yc, r, color, canvas, draw):
     delta = 2 * (1 - r)
 
     while x < y:
-        if delta <= 0:
-            d = 2 * (delta + y) - 1
-            x += 1
+        d = 2 * (delta + y) - 1
+        x += 1
 
-            if d >= 0 :
-                y -= 1
-                delta += 2 * (x - y + 1)
-            else:
-                delta += x + x + 1
-        else:
+        if d >= 0 :
             y -= 1
-            x += 1
             delta += 2 * (x - y + 1)
+        else:
+            delta += x + x + 1
 
         if draw:
             draw_pixels(canvas, [x + xc, y + yc, color], xc, yc, circle = True)
