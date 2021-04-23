@@ -12,10 +12,9 @@ def midpoint_circle(xc, yc, r, color, canvas, draw):
     if draw:
         draw_pixels(canvas, [x + xc, y + yc, color], xc, yc, circle = True)
 
-    border = x / sqrt(2)
     delta = 1 - r
 
-    while y <= border:
+    while y <= x:
         if delta >= 0:
             x -= 1
             delta -= x + x
