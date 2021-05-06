@@ -144,6 +144,27 @@ def draw_borders(img, figures):
             if len(line) != 0:
                 draw_line(img, line[2])
 
+def fill_figure(figures, img, canvas, color_var, p_min, p_max, mode_var, time_entry):
+    if len(figures[-1][0]) != 0:
+        messagebox.showwarning("Ошибка", "Не все фигуры замкнуты!")
+        return
+        
+    mark_color = cu.Color((255, 128, 0))
+    bg_color  = cu.Color((255, 255, 255))
+    figure_color = get_color(color_var)
+
+    delay = mode_var.get()
+
+    start_time = time.time()
+    method_with_flag(figures, img, canvas, mark_color, bg_color, figure_color, p_min, p_max, delay)
+    end_time = time.time()
+
+    draw_borders(img, figures)
+
+    time_str = str(round(end_time - start_time, 2)) + "s"
+    time_entry.delete(0, END)
+    time_entry.insert(0, time_str)
+
 def mark_desired_pixels(img, figures, mark_color):
     for fig in figures:
         for line in fig:
@@ -171,29 +192,13 @@ def mark_desired_pixels(img, figures, mark_color):
 
                 y += 1
 
-def fill_figure(figures, img, canvas, color_var, p_min, p_max, mode_var, time_entry):
-    if len(figures[-1][0]) != 0:
-        messagebox.showwarning("Ошибка", "Не все фигуры замкнуты!")
-        return
-        
-    mark_color = get_color(color_var) + (1, 1, 1)
-    bg_color  = cu.Color((255, 255, 255))
-    figure_color = get_color(color_var)
-
-    flag = False
-    delay = mode_var.get()
-
-    x_max = p_max[0]
-    x_min = p_min[0]
-    y_max = p_max[1]
-    y_min = p_min[1]
-    
-    start_time = time.time()
-
+def method_with_flag(figures, img, canvas, mark_color, bg_color, figure_color, p_min, p_max, delay):
     mark_desired_pixels(img, figures, mark_color)
 
-    for y in range(y_max, y_min, -1):
-        for x in range(x_min, x_max + 2):
+    flag = False
+
+    for y in range(p_max[1], p_min[1] - 1, -1):
+        for x in range(p_min[0], p_max[0] + 3):
 
             if img.get(x, y) == mark_color.rgb:
                 flag = not flag
@@ -206,12 +211,6 @@ def fill_figure(figures, img, canvas, color_var, p_min, p_max, mode_var, time_en
         if delay:
             canvas.update()
 
-    canvas.update()
-
-    end_time = time.time()
-
-    draw_borders(img, figures)
-
-    time_str = str(round(end_time - start_time, 2)) + "s"
-    time_entry.delete(0, END)
-    time_entry.insert(0, time_str)
+    if delay == False:
+        canvas.update()
+        
