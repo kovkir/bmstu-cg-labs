@@ -1,6 +1,5 @@
 from tkinter import messagebox, PhotoImage, END
 from math import cos, sin, radians, pi
-import colorutils as cu
 import time
 
 from brezenham import bresenham_int
@@ -30,27 +29,30 @@ def clear_canvas(img, canvas, figures, p_min, p_max, time_entry, points_listbox)
     figures.append([[]])
 
 def set_pixel(img, x, y, color):
-    img.put(color.hex, (x, y))
+    img.put(color, (x, y))
 
 def draw_line(img, points):
     for i in points:
         set_pixel(img, i[0], i[1], i[2])
 
+def rgb(color):
+    return (int(color[1:3], 16), int(color[3:5], 16), int(color[5:7], 16))
+
 def get_color(color_var):
     col_var = color_var.get()
 
     if col_var == 0:
-        color = cu.Color((0, 0, 0))
+        color = "#000000"
     elif col_var == 1:
-        color = cu.Color((255, 0, 0))
+        color = "#ff0000"
     elif col_var == 2:
-        color = cu.Color((0, 0, 255))
+        color = "#0000ff"
     elif col_var == 3:
-        color = cu.Color((62, 189, 51))
+        color = "#3ebd33"
     elif col_var == 4:
-        color = cu.Color((255, 211, 51))
+        color = "#ffd333"
     else:
-        color = cu.Color((189, 8, 252))
+        color = "#bd08fc"
     
     return color
 
@@ -88,7 +90,7 @@ def click_left(event, figures, img, color_var, p_min, p_max, points_listbox):
         figures[-1][-1].append(points)
         figures[-1].append([figures[-1][-1][1]])
 
-def click_right(event, figures, img, color_var, points_listbox):
+def click_right(event, figures, img, color_var):
     if len(figures[-1][-1]) == 0:
         messagebox.showwarning("Ошибка", "Незамкнутых фигур нет!")
         return
@@ -149,8 +151,8 @@ def fill_figure(figures, img, canvas, color_var, p_min, p_max, mode_var, time_en
         messagebox.showwarning("Ошибка", "Не все фигуры замкнуты!")
         return
         
-    mark_color = cu.Color((255, 128, 0))
-    bg_color  = cu.Color((255, 255, 255))
+    mark_color = "#ff8000"
+    bg_color  = "#ffffff"
     figure_color = get_color(color_var)
 
     delay = mode_var.get()
@@ -166,6 +168,8 @@ def fill_figure(figures, img, canvas, color_var, p_min, p_max, mode_var, time_en
     time_entry.insert(0, time_str)
 
 def mark_desired_pixels(img, figures, mark_color):
+    mark_color_rgb = rgb(mark_color)
+
     for fig in figures:
         for line in fig:
             if len(line) == 0 or line[1][1] == line[0][1]:
@@ -185,7 +189,7 @@ def mark_desired_pixels(img, figures, mark_color):
             while y < y_max:                    
                 x = dx / dy * (y - line[0][1]) + line[0][0]
 
-                if img.get(int(x) + 1, y) == mark_color.rgb:
+                if img.get(int(x) + 1, y) == mark_color_rgb:
                     set_pixel(img, int(x) + 2, y, mark_color)
                 else:
                     set_pixel(img, int(x) + 1, y, mark_color)
@@ -194,13 +198,14 @@ def mark_desired_pixels(img, figures, mark_color):
 
 def method_with_flag(figures, img, canvas, mark_color, bg_color, figure_color, p_min, p_max, delay):
     mark_desired_pixels(img, figures, mark_color)
-
+    mark_color_rgb = rgb(mark_color)
+    
     flag = False
 
     for y in range(p_max[1], p_min[1] - 1, -1):
         for x in range(p_min[0], p_max[0] + 3):
 
-            if img.get(x, y) == mark_color.rgb:
+            if img.get(x, y) == mark_color_rgb:
                 flag = not flag
 
             if flag:
@@ -210,7 +215,4 @@ def method_with_flag(figures, img, canvas, mark_color, bg_color, figure_color, p
 
         if delay:
             canvas.update()
-
-    if delay == False:
-        canvas.update()
         

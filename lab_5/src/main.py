@@ -131,9 +131,10 @@ def main():
     img = PhotoImage(width = CANVAS_WIDTH, height = CANVAS_HEIGHT)
     canvas.create_image(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2, image = img, state='normal')
 
-    canvas.bind('<1>', lambda event: click_left(event, figures, img, color_var, 
-                                                p_min, p_max, points_listbox))
-    canvas.bind('<2>', lambda event: click_right(event, figures, img, color_var, points_listbox))
+    canvas.bind('<1>', 
+        lambda event: click_left(event, figures, img, color_var, p_min, p_max, points_listbox))
+    canvas.bind('<2>',
+        lambda event: click_right(event, figures, img, color_var))
 
     x_entry.insert(0, 100)
     y_entry.insert(0, 100)
