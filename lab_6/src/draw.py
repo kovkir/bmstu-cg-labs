@@ -139,9 +139,9 @@ def draw_point(figures, img, color_var, x_entry, y_entry, points_listbox):
         figures[-1].append([figures[-1][-1][1]])
 
 def fill_figure(figures, img, canvas, color_var, mode_var, time_entry, seed_pixel):
-    # if len(figures[-1][0]) != 0:
-    #     messagebox.showwarning("Ошибка", "Не все фигуры замкнуты!")
-    #     return
+    if len(figures[-1][0]) != 0:
+        messagebox.showwarning("Ошибка", "Не все фигуры замкнуты!")
+        return
 
     if seed_pixel == [-1, -1]:
         messagebox.showwarning("Ошибка", "Отсутствует затравка!")
