@@ -1,6 +1,4 @@
-from tkinter import messagebox, PhotoImage, END
-from math import cos, sin, radians, pi
-from time import time, sleep
+from tkinter import messagebox, END
 
 from sutherland_cohen import alg_sutherland_cohen
 
@@ -146,7 +144,6 @@ def add_vert_horiz_lines(rectangle, lines, canvas, color_var):
         messagebox.showerror("Ошибка", "Отсутствует отсекатель")
         return
 
-    print(rectangle)
     color = get_color(color_var)
 
     x1 = rectangle[0]

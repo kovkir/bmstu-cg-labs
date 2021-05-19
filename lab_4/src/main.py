@@ -1,4 +1,4 @@
-from tkinter import Tk, ttk, Radiobutton, Checkbutton, Canvas, Label, Entry, Button, DISABLED, NORMAL, IntVar, BooleanVar
+from tkinter import Tk, Radiobutton, Checkbutton, Canvas, Label, Entry, Button, DISABLED, NORMAL, IntVar, BooleanVar
 from draw import draw_figure, draw_spectrum, clear_canvas, WINDOW_HEIGHT, WINDOW_WIDTH, CANVAS_WIDTH, CANVAS_HEIGHT
 from comparisons import time_comparison
 

@@ -1,5 +1,5 @@
-from tkinter import Tk, ttk, messagebox, Radiobutton, Canvas, Label, Entry, Button, \
-                    PhotoImage, DISABLED, IntVar, BooleanVar, Listbox, Scrollbar
+from tkinter import Tk, Radiobutton, Canvas, Label, Entry, Button, \
+                    PhotoImage, DISABLED, IntVar, BooleanVar, Listbox
 from draw import WINDOW_HEIGHT, WINDOW_WIDTH, CANVAS_WIDTH, CANVAS_HEIGHT, \
                  clear_canvas, click_left, click_right, click_centre, draw_point, fill_figure
                  

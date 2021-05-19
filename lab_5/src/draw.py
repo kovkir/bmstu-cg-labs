@@ -1,5 +1,4 @@
-from tkinter import messagebox, PhotoImage, END
-from math import cos, sin, radians, pi
+from tkinter import messagebox, END
 import time
 
 from brezenham import bresenham_int

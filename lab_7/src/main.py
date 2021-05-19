@@ -1,5 +1,4 @@
-from tkinter import Tk, ttk, messagebox, Radiobutton, Canvas, Label, Entry, Button, \
-                    PhotoImage, DISABLED, IntVar, BooleanVar, Listbox, Scrollbar
+from tkinter import Tk, Radiobutton, Canvas, Label, Entry, Button, DISABLED, IntVar
 from draw import WINDOW_HEIGHT, WINDOW_WIDTH, CANVAS_WIDTH, CANVAS_HEIGHT, \
                  clear_canvas, click_left, click_right, click_left_motion, \
                  add_line, draw_rectangle, cut_off, add_vert_horiz_lines
@@ -198,7 +197,6 @@ def main():
         command = lambda: clear_canvas(canvas, lines, rectangle)).\
         place(width = 264, height = 41,  x = CANVAS_WIDTH + 27, y = 682)
 
-    is_set_rectangle = False
 
     canvas.bind('<1>', 
         lambda event: click_left(event))

@@ -1,12 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import time
-from tkinter import messagebox
-
-from brezenham import bresenham_ellipse, bresenham_circle
-from canonical import canonical_ellipse, canonical_сircle
-from parametric import parameter_ellipse, parameter_circle
-from midpoint import midpoint_ellipse, midpoint_circle
 
 from draw import CANVAS_WIDTH, CANVAS_HEIGHT, clear_canvas, add_circle, add_ellipse
 
