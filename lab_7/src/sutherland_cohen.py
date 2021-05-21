@@ -11,10 +11,10 @@ def get_point_bits(rectangle, point):
     if point[0] > rectangle[1]:
         bits += 0b0010
     
-    if point[1] > rectangle[2]:
+    if point[1] < rectangle[2]:
         bits += 0b0100
         
-    if point[1] < rectangle[3]:
+    if point[1] > rectangle[3]:
         bits += 0b1000
 
     return bits
@@ -36,7 +36,7 @@ def alg_sutherland_cohen(rectangle, line, canvas, color):
     p1 = [line[0][0], line[0][1]]
     p2 = [line[1][0], line[1][1]]
 
-    flag = 1 # при горизонтальности = 0; при вертикальности = -1 
+    flag = 0 # при горизонтальности = 1; при вертикальности = -1 
 
     if p1[0] == p2[0]:
         flag = -1
@@ -44,7 +44,7 @@ def alg_sutherland_cohen(rectangle, line, canvas, color):
         m = (p2[1] - p1[1]) / (p2[0] - p1[0])
 
         if m == 0:
-            flag = 0
+            flag = 1
 
     for i in range(4):
         p1_bits = get_point_bits(rectangle, p1)

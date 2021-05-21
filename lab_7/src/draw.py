@@ -167,9 +167,9 @@ def cut_off(rectangle, lines, canvas, color_var):
         messagebox.showinfo("Ошибка", "Отсутствует отсекатель")
 
     rect = [min(rectangle[0], rectangle[2]), max(rectangle[0], rectangle[2]),
-            max(rectangle[1], rectangle[3]), min(rectangle[1], rectangle[3])]
+            min(rectangle[1], rectangle[3]), max(rectangle[1], rectangle[3])]
 
-    canvas.create_rectangle(rect[0] + 1, rect[3] + 1, rect[1] - 1, rect[2] - 1, 
+    canvas.create_rectangle(rect[0] + 1, rect[2] + 1, rect[1] - 1, rect[3] - 1, 
                             fill = "white", outline = "white")
     
     color = get_color(color_var)
