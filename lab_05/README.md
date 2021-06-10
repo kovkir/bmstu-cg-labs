@@ -4,4 +4,4 @@
 
 # Пример работы программы
 
-![](https://github.com/kovkir/bmstu-cg-labs/raw/main/lab_5/example/example.png)
+![](https://github.com/kovkir/bmstu-cg-labs/raw/main/lab_05/example/example.png)

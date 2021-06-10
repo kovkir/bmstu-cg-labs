@@ -15,4 +15,4 @@
 
 # Пример работы программы
 
-![](https://github.com/kovkir/bmstu-cg-labs/raw/main/lab_3/example.png)
+![](https://github.com/kovkir/bmstu-cg-labs/raw/main/lab_03/example.png)
